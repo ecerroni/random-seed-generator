@@ -1,8 +1,8 @@
-# meteor-random
+# meteor-random-node
 Meteor's Random Package, Stripped for Straight Node
 
 ```
-  Random = require('meteor-random');
+  Random = require('meteor-random-node');
 ```
 The random package provides several functions for generating random numbers. It uses a cryptographically strong pseudorandom number generator when possible, but falls back to a weaker random number generator when cryptographically strong randomness is not available (on older browsers or on servers that don't have enough entropy to seed the cryptographically strong generator).
 
