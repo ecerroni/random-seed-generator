@@ -1,6 +1,6 @@
 {
   "name": "random-seed-generator",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Random generator for strings, secrets and numbers – with built in crypto module and seed generation for predictable outputs",
   "main": "dist/index.js",
   "browser": "lib/index.js",
@@ -11,7 +11,7 @@
     "postcoverage": "opn coverage/lcov-report/index.html",
     "clean": "rimraf dist",
     "build-browser": "browserify index.js  | uglifyjs > ./lib/index.js",
-    "build-node": "cp index.js ./dist/index.js",
+    "build-node": "mkdir -p ./dist && cp index.js ./dist/index.js",
     "prebuild": "npm run clean",
     "build": "npm run build-node && npm run build-browser",
     "preversion": "npm test && npm run build",
@@ -31,7 +31,8 @@
   "dependencies": {},
   "devDependencies": {
     "browserify": "16.2.3",
-    "jest": "23.6.0"
+    "jest": "23.6.0",
+    "standard-changelog": "2.0.6"
   },
   "repository": {
     "type": "git",
