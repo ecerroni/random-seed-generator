@@ -16,7 +16,7 @@ OR
   import Random from 'random-seed-generator';
 ```
 
-The random package provides several functions for generating random numbers, general strings (passwords, UUID, etc) and secrets. It uses a cryptographically strong pseudorandom number generator when possible, but falls back to a weaker random number generator when cryptographically strong randomness is not available (on older browsers or on servers that don't have enough entropy to seed the cryptographically strong generator).
+The random package provides several functions for generating random numbers, general strings and secrets. It uses a cryptographically strong pseudorandom number generator when possible, but falls back to a weaker random number generator when cryptographically strong randomness is not available (on older browsers or on servers that don't have enough entropy to seed the cryptographically strong generator).
 
 * `Random.number(options)` | ex. `Random.number({ length: 11 })`
 
