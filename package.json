@@ -1,18 +1,41 @@
 {
-  "name": "meteor-random-node",
-  "version": "0.0.5",
-  "description": "Meteor's Random Package for Straight Node – with built in crypto module",
-  "main": "index.js",
+  "name": "random-seed-generator",
+  "version": "0.0.1",
+  "description": "Random generator for strings, secrets and numbers – with built in crypto module and seed generation for predictable outputs",
+  "main": "dist/index.js",
+  "browser": "lib/index.js",
   "scripts": {
-    "test": "node test.js"
+    "test": "jest",
+    "test:clear-cache": "jest --clearCache",
+    "coverage": "npm test -- --coverage",
+    "postcoverage": "opn coverage/lcov-report/index.html",
+    "clean": "rimraf dist",
+    "build-browser": "browserify index.js  | uglifyjs > ./lib/index.js",
+    "build-node": "cp index.js ./dist/index.js",
+    "prebuild": "npm run clean",
+    "build": "npm run build-node && npm run build-browser",
+    "preversion": "npm test && npm run build",
+    "version": "standard-changelog && git add CHANGELOG.md",
+    "postpublish": "git push random-seed-generator master --follow-tags"
   },
-  "author": "Trever Faden",
+  "files": [
+    "dist",
+    "lib"
+  ],
+  "author": {
+    "name": "ric0",
+    "email": "e.cerroni@gmail.com",
+    "url": "https://github.com/ecerroni"
+  },
   "license": "BSD-2-Clause",
   "dependencies": {},
-  "devDependencies": {},
+  "devDependencies": {
+    "browserify": "16.2.3",
+    "jest": "23.6.0"
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/dVelopment/meteor-random.git"
+    "url": "https://github.com/ecerroni/random-seed-generator"
   },
   "keywords": [
     "random",
@@ -24,10 +47,15 @@
     "api",
     "keys",
     "tokens",
-    "UUID"
+    "UUID",
+    "strings",
+    "numbers",
+    "passwords",
+    "secrets",
+    "seed"
   ],
   "bugs": {
-    "url": "https://github.com/dVelopment/meteor-random/issues"
+    "url": "https://github.com/ecerroni/random-seed-generator/issues"
   },
-  "homepage": "https://github.com/dVelopment/meteor-random"
+  "homepage": "https://github.com/ecerroni/random-seed-generator"
 }

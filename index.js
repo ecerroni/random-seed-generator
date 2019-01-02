@@ -84,10 +84,6 @@ var Alea = function () {
   } (Array.prototype.slice.call(arguments)));
 };
 
-var UNMISTAKABLE_CHARS = "23456789ABCDEFGHJKLMNPQRSTWXYZabcdefghijkmnopqrstuvwxyz";
-var BASE64_CHARS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" +
-  "0123456789-_";
-
 // If seeds are provided, then the alea PRNG will be used, since cryptographic
 // PRNGs (Node crypto and window.crypto.getRandomValues) don't allow us to
 // specify seeds. The caller is responsible for making sure to provide a seed
@@ -151,22 +147,54 @@ RandomGenerator.prototype._randomString = function (charsCount,
   return digits.join("");
 };
 
-RandomGenerator.prototype.id = function (charsCount) {
-  var self = this;
+RandomGenerator.prototype.string = function (obj) {
   // 17 characters is around 96 bits of entropy, which is the amount of
   // state in the Alea PRNG.
-  if (charsCount === undefined)
-    charsCount = 17;
-
+  var charsCount = 17;
+  var UNMISTAKABLE_CHARS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()[]";
+  if (!!obj && typeof obj === 'object' && obj !== null) {
+        if (obj.length && typeof obj.length === 'number') {
+		charsCount = obj.length;
+	}
+	if (obj.pool && typeof obj.pool === 'string') {
+		UNMISTAKABLE_CHARS = obj.pool;
+	}
+  }
+  var self = this;
   return self._randomString(charsCount, UNMISTAKABLE_CHARS);
 };
 
-RandomGenerator.prototype.secret = function (charsCount) {
+RandomGenerator.prototype.number = function (obj) {
+  var charsCount = 8;
+  var UNMISTAKABLE_CHARS = "0123456789";
+  if (!!obj && typeof obj === 'object' && !Array.isArray(obj) && obj !== null) {
+        if (obj.length && typeof obj.length === 'number') {
+		charsCount = obj.length < 20 ? obj.length : 19;
+	}
+  }
+  var self = this;
+  var num = self._randomString(charsCount, UNMISTAKABLE_CHARS);
+  if (num[0] === '0') {
+   	num = '1' + num.substr(1, num.length);
+   }
+  return parseInt(num, 10);
+};
+
+RandomGenerator.prototype.secret = function (obj) {
+  var charsCount = 43;
+  var BASE64_CHARS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" +
+    "0123456789-_";
+  if (!!obj && typeof obj === 'object' && obj !== null) {
+        if (obj.length && typeof obj.length === 'number') {
+		charsCount = obj.length;
+	}
+	if (obj.pool && typeof obj.pool === 'string') {
+		BASE64_CHARS = obj.pool;
+	}
+  }
   var self = this;
   // Default to 256 bits of entropy, or 43 characters at 6 bits per
   // character.
-  if (charsCount === undefined)
-    charsCount = 43;
   return self._randomString(charsCount, BASE64_CHARS);
 };
 
