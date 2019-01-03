@@ -1,0 +1,62 @@
+{
+  "name": "random-seed-generator",
+  "version": "0.0.1",
+  "description": "Random generator for strings, secrets and numbers – with built in crypto module and seed generation for predictable outputs",
+  "main": "lib/index.js",
+  "browser": "dist/index.min.js",
+  "scripts": {
+    "test": "jest",
+    "test:clear-cache": "jest --clearCache",
+    "coverage": "npm test --coverage",
+    "postcoverage": "opn coverage/lcov-report/index.html",
+    "clean": "rimraf dist",
+    "build-browser": "browserify index.js  | uglifyjs > ./dist/index.js",
+    "build-node": "mkdir -p ./dist && cp index.js ./lib/index.js",
+    "prebuild": "npm run clean",
+    "build": "npm run build-node && npm run build-browser",
+    "preversion": "npm test && npm run build",
+    "version": "standard-changelog && git add CHANGELOG.md",
+    "postpublish": "git push random-seed-generator master --follow-tags"
+  },
+  "files": [
+    "dist",
+    "lib"
+  ],
+  "author": {
+    "name": "ric0",
+    "email": "e.cerroni@gmail.com",
+    "url": "https://github.com/ecerroni"
+  },
+  "license": "BSD-2-Clause",
+  "dependencies": {},
+  "devDependencies": {
+    "browserify": "16.2.3",
+    "jest": "23.6.0",
+    "standard-changelog": "2.0.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ecerroni/random-seed-generator"
+  },
+  "keywords": [
+    "random",
+    "meteor",
+    "crypto",
+    "api",
+    "key",
+    "generator",
+    "api",
+    "keys",
+    "tokens",
+    "UUID",
+    "strings",
+    "numbers",
+    "passwords",
+    "secrets",
+    "seed"
+  ],
+  "bugs": {
+    "url": "https://github.com/ecerroni/random-seed-generator/issues"
+  },
+  "homepage": "https://github.com/ecerroni/random-seed-generator"
+}
