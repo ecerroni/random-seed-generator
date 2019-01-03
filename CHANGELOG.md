@@ -1,3 +1,7 @@
+## [0.0.7](https://github.com/ecerroni/random-seed-generator/compare/v0.0.2...v0.0.7) (2019-01-03)
+
+
+
 ## 0.0.2 (2019-01-03)
 
 
