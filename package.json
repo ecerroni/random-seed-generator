@@ -1,6 +1,6 @@
 {
   "name": "random-seed-generator",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Random generator for strings, secrets and numbers – with built in crypto module and seed generation for predictable outputs",
   "main": "lib/index.js",
   "browser": "dist/index.min.js",
